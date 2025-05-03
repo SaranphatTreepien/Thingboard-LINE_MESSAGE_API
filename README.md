@@ -1,10 +1,6 @@
 # ThingsBoard Temperature Alert via LINE Messaging API 🚨🌡️
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![ThingsBoard](https://img.shields.io/badge/Platform-ThingsBoard-green.svg)](https://thingsboard.io/)
-[![LINE Messaging API](https://img.shields.io/badge/API-LINE%20Messaging-blue.svg)](https://developers.line.biz/en/services/messaging-api/)
 
----
 
 ## 📌 Overview
 
@@ -39,26 +35,12 @@
 3. คัดลอก **Channel Access Token** สำหรับใช้งานใน ThingsBoard
 
 ---
-
 ### 2. สร้าง Rule Chain ใน ThingsBoard
+![image](https://github.com/user-attachments/assets/94d12895-98af-4f79-8d58-051bc28cf1c4)
+![image](https://github.com/user-attachments/assets/f207e279-4a94-4215-a9d5-ff08065ff113)
 
 #### 2.1 เพิ่ม Script Transformation Node
 
-- ใส่โค้ดนี้ใน Script Node เพื่อเช็คค่า temperature และสร้างข้อความแจ้งเตือน
-
-if (msg.temperature > 30) {
-var newMsg = {};
-newMsg.to = "USER_ID"; // แทนที่ด้วย LINE userId หรือ groupId
-newMsg.messages = [{
-"type": "text",
-"text": "⚠️ แจ้งเตือน! อุณหภูมิสูงเกิน 30°C (" + msg.temperature + "°C)"
-}];
-return {msg: newMsg, metadata: metadata, msgType: msgType};
-} else {
-return null; // หยุด flow หากไม่เกิน 30
-}
-
-text
 
 #### 2.2 เพิ่ม REST API Call Node
 
