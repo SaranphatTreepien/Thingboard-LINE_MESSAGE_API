@@ -1,68 +1,111 @@
-# Thingboard-LINE_MESSAGE_API
+# ThingsBoard Temperature Alert via LINE Messaging API 🚨🌡️
 
-ตัวอย่างขั้นตอนและเนื้อหาสำหรับเขียน README หรือ Wiki บน GitHub เพื่ออธิบายวิธีสร้างระบบแจ้งเตือนอุณหภูมิสูงผ่าน LINE ด้วย ThingsBoard
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![ThingsBoard](https://img.shields.io/badge/Platform-ThingsBoard-green.svg)](https://thingsboard.io/)
+[![LINE Messaging API](https://img.shields.io/badge/API-LINE%20Messaging-blue.svg)](https://developers.line.biz/en/services/messaging-api/)
 
-🚨 IoT Temperature Alert to LINE with ThingsBoard
-1. เตรียม LINE Messaging API
-สร้าง LINE Official Account และเปิดใช้งาน Messaging API
+---
 
-สร้าง Channel Access Token สำหรับใช้ส่งข้อความผ่าน API
+## 📌 Overview
 
-จดจำ USER_ID หรือ groupId/roomId ที่ต้องการส่งข้อความ
+โปรเจกต์นี้เป็นตัวอย่างการตั้งค่า **ThingsBoard** ให้ส่งการแจ้งเตือนเมื่อค่าอุณหภูมิ (temperature) จากอุปกรณ์ IoT เกิน 30°C ผ่าน **LINE Messaging API** โดยใช้ Rule Chain ของ ThingsBoard
 
-2. ตั้งค่า ThingsBoard Rule Chain
-2.1 สร้าง Script Transform Node
-เพิ่ม Node ประเภท Script Transformation ใน Rule Chain
+---
 
-ใส่โค้ดตัวอย่างนี้:
+## 🚀 Features
 
-javascript
+- ตรวจสอบค่า temperature จากอุปกรณ์
+- แจ้งเตือนผ่าน LINE เมื่ออุณหภูมิสูงเกิน 30°C
+- ใช้ Script Transformation Node ใน ThingsBoard เพื่อเตรียมข้อความ
+- ส่งข้อความผ่าน REST API Call Node ไปยัง LINE Messaging API
+
+---
+
+## 🛠️ Prerequisites
+
+- ThingsBoard (Community หรือ Professional Edition) ที่ติดตั้งและใช้งานได้
+- LINE Official Account พร้อมเปิดใช้งาน Messaging API
+- Channel Access Token ของ LINE Messaging API
+- USER_ID หรือ groupId ของ LINE ที่ต้องการส่งข้อความ
+
+---
+
+## ⚙️ Setup Guide
+
+### 1. สร้าง LINE Channel Access Token
+
+1. เข้าสู่ [LINE Developers Console](https://developers.line.biz/console/)
+2. สร้าง Provider และ Channel ใหม่ (Messaging API)
+3. คัดลอก **Channel Access Token** สำหรับใช้งานใน ThingsBoard
+
+---
+
+### 2. สร้าง Rule Chain ใน ThingsBoard
+
+#### 2.1 เพิ่ม Script Transformation Node
+
+- ใส่โค้ดนี้ใน Script Node เพื่อเช็คค่า temperature และสร้างข้อความแจ้งเตือน
+
 if (msg.temperature > 30) {
-    var newMsg = {};
-    newMsg.to = "USER_ID"; // เปลี่ยนเป็น userId/groupId/roomId ที่ต้องการ
-    newMsg.messages = [{
-      "type": "text",
-      "text": "แจ้งเตือน: อุณหภูมิสูงเกิน 30°C (" + msg.temperature + "°C)"
-    }];
-    return {msg: newMsg, metadata: metadata, msgType: msgType};
+var newMsg = {};
+newMsg.to = "USER_ID"; // แทนที่ด้วย LINE userId หรือ groupId
+newMsg.messages = [{
+"type": "text",
+"text": "⚠️ แจ้งเตือน! อุณหภูมิสูงเกิน 30°C (" + msg.temperature + "°C)"
+}];
+return {msg: newMsg, metadata: metadata, msgType: msgType};
 } else {
-    return null; // ไม่เข้าเงื่อนไขจะหยุด flow
+return null; // หยุด flow หากไม่เกิน 30
 }
-2.2 เพิ่ม REST API Call Node
-ต่อ Node ถัดไปเป็น REST API Call
 
-ตั้งค่าดังนี้:
+text
 
-URL: https://api.line.me/v2/bot/message/push
+#### 2.2 เพิ่ม REST API Call Node
 
-Method: POST
+- ตั้งค่าดังนี้:
 
-Headers:
+| ค่า           | รายละเอียด                              |
+| ------------- | ------------------------------------- |
+| URL           | `https://api.line.me/v2/bot/message/push` |
+| Method        | POST                                  |
+| Headers       | `Content-Type: application/json`<br>`Authorization: Bearer {LINE_CHANNEL_ACCESS_TOKEN}` |
+| Request Body  | ใช้ค่าจาก `${msg}` (ค่าที่ได้จาก Script Node) |
 
-Content-Type: application/json
+---
 
-Authorization: Bearer {LINE_CHANNEL_ACCESS_TOKEN} (แทนที่ด้วย token ของคุณ)
+### 3. ทดสอบระบบ
 
-Body:
-ใช้ ${msg} (หรือ ${msg.msg} ถ้าโครงสร้าง message อยู่ใน msg.msg)
+- ส่ง Telemetry ข้อมูล temperature จากอุปกรณ์ผ่าน ThingsBoard
+- หากค่า temperature > 30 จะได้รับข้อความแจ้งเตือนใน LINE
 
-3. ตัวอย่าง Flow
-อุปกรณ์ส่งค่า temperature มาที่ ThingsBoard
+---
 
-Script Node ตรวจสอบค่า ถ้าเกิน 30°C จะสร้างข้อความแจ้งเตือน
+## 📚 References
 
-REST API Call Node ส่งข้อความแจ้งเตือนผ่าน LINE Messaging API
+- [ThingsBoard Rule Engine Documentation](https://thingsboard.io/docs/user-guide/rule-engine/)
+- [LINE Messaging API Documentation](https://developers.line.biz/en/reference/messaging-api/)
+- [LINE Official Account Manager](https://manager.line.biz/)
 
-4. หมายเหตุ
-ต้องมี LINE Official Account และเปิดใช้งาน Messaging API
+---
 
-ตรวจสอบว่า Channel Access Token และ USER_ID ถูกต้อง
+## 📝 License
 
-สามารถขยาย logic ใน Script Node สำหรับเงื่อนไขอื่น ๆ ได้
+โปรเจกต์นี้ใช้สัญญาอนุญาตแบบ MIT License - ดูรายละเอียดในไฟล์ [LICENSE](LICENSE)
 
-5. อ้างอิง
-[LINE Messaging API Getting Started]
+---
 
-[LINE Messaging API Reference]
+## 🙏 Contact
 
-[ThingsBoard Rule Engine Guide]
+หากมีข้อสงสัยหรือแนะนำ สามารถติดต่อได้ที่:
+
+- Email: your.email@example.com
+- GitHub: [your-github-profile](https://github.com/your-github-profile)
+
+---
+
+> **หมายเหตุ:**  
+> อย่าลืมเปลี่ยนค่า `USER_ID` และ `LINE_CHANNEL_ACCESS_TOKEN` ให้ถูกต้องก่อนใช้งานจริง
+
+---
+
+### ขอบคุณที่ใช้โปรเจกต์นี้! 🎉
