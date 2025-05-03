@@ -37,7 +37,8 @@
 ---
 ### 2. สร้าง Rule Chain ใน ThingsBoard
 ![image](https://github.com/user-attachments/assets/94d12895-98af-4f79-8d58-051bc28cf1c4)
-![image](https://github.com/user-attachments/assets/f207e279-4a94-4215-a9d5-ff08065ff113)
+![image](https://github.com/user-attachments/assets/b0758255-54bb-4fe7-ba17-587e67e2fcf4)
+
 
 #### 2.1 เพิ่ม Script Transformation Node
 
