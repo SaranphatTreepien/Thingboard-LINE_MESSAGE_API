@@ -26,7 +26,7 @@
 ---
 ### 2. สร้าง Rule Chain ใน ThingsBoard
 ![image](https://github.com/user-attachments/assets/94d12895-98af-4f79-8d58-051bc28cf1c4)
-![image](https://github.com/user-attachments/assets/b0758255-54bb-4fe7-ba17-587e67e2fcf4)
+![image](https://github.com/user-attachments/assets/041b7c0e-8ff8-4b5a-8d5f-a858b35d5cb3)
 ![image](https://github.com/user-attachments/assets/c51210e4-1939-443a-8d06-41b29d17e451)
 
 
