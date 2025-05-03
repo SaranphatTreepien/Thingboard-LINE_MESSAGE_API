@@ -54,6 +54,8 @@
 | Method        | POST                                  |
 | Headers       | `Content-Type: application/json`<br>`Authorization: Bearer {LINE_CHANNEL_ACCESS_TOKEN}` |
 | Request Body  | ใช้ค่าจาก `${msg}` (ค่าที่ได้จาก Script Node) |
+![image](https://github.com/user-attachments/assets/3985a061-8949-497f-8196-9e986bebd9ca)
+![image](https://github.com/user-attachments/assets/9b4d2f89-718a-4a5f-953a-54735a7c39df)
 
 ---
 
