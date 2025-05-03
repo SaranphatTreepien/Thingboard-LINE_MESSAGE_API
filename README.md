@@ -16,24 +16,13 @@
 - ส่งข้อความผ่าน REST API Call Node ไปยัง LINE Messaging API
 
 ---
-
-## 🛠️ Prerequisites
-
-- ThingsBoard (Community หรือ Professional Edition) ที่ติดตั้งและใช้งานได้
-- LINE Official Account พร้อมเปิดใช้งาน Messaging API
-- Channel Access Token ของ LINE Messaging API
-- USER_ID หรือ groupId ของ LINE ที่ต้องการส่งข้อความ
-
----
-
 ## ⚙️ Setup Guide
-
 ### 1. สร้าง LINE Channel Access Token
 
 1. เข้าสู่ [LINE Developers Console](https://developers.line.biz/console/)
 2. สร้าง Provider และ Channel ใหม่ (Messaging API)
 3. คัดลอก **Channel Access Token** สำหรับใช้งานใน ThingsBoard
-
+4. https://www.youtube.com/watch?v=C-1tuVlnEo0
 ---
 ### 2. สร้าง Rule Chain ใน ThingsBoard
 ![image](https://github.com/user-attachments/assets/94d12895-98af-4f79-8d58-051bc28cf1c4)
