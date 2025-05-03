@@ -41,7 +41,7 @@
 
 
 #### 2.1 เพิ่ม Script Transformation Node
-
+- ใช้โค้ดจากไฟล์ [`Script.js`](./Script.js) โดยคัดลอกโค้ดนี้ไปวางใน Script Node ของ ThingsBoard
 
 #### 2.2 เพิ่ม REST API Call Node
 
