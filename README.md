@@ -38,6 +38,7 @@
 ### 2. สร้าง Rule Chain ใน ThingsBoard
 ![image](https://github.com/user-attachments/assets/94d12895-98af-4f79-8d58-051bc28cf1c4)
 ![image](https://github.com/user-attachments/assets/b0758255-54bb-4fe7-ba17-587e67e2fcf4)
+![image](https://github.com/user-attachments/assets/c51210e4-1939-443a-8d06-41b29d17e451)
 
 
 #### 2.1 เพิ่ม Script Transformation Node
@@ -58,31 +59,8 @@
 
 ### 3. ทดสอบระบบ
 
-- ส่ง Telemetry ข้อมูล temperature จากอุปกรณ์ผ่าน ThingsBoard
+- ส่ง Attributes,Telemetry ข้อมูล temperature จากอุปกรณ์ผ่าน ThingsBoard
 - หากค่า temperature > 30 จะได้รับข้อความแจ้งเตือนใน LINE
-
----
-
-## 📚 References
-
-- [ThingsBoard Rule Engine Documentation](https://thingsboard.io/docs/user-guide/rule-engine/)
-- [LINE Messaging API Documentation](https://developers.line.biz/en/reference/messaging-api/)
-- [LINE Official Account Manager](https://manager.line.biz/)
-
----
-
-## 📝 License
-
-โปรเจกต์นี้ใช้สัญญาอนุญาตแบบ MIT License - ดูรายละเอียดในไฟล์ [LICENSE](LICENSE)
-
----
-
-## 🙏 Contact
-
-หากมีข้อสงสัยหรือแนะนำ สามารถติดต่อได้ที่:
-
-- Email: your.email@example.com
-- GitHub: [your-github-profile](https://github.com/your-github-profile)
 
 ---
 
