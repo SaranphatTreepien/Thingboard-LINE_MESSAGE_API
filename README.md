@@ -53,12 +53,10 @@
 | URL           | `https://api.line.me/v2/bot/message/push` |
 | Method        | POST                                  |
 | Headers       | `Content-Type: application/json`<br>`Authorization: Bearer {LINE_CHANNEL_ACCESS_TOKEN}` |
-| Request Body  | ใช้ค่าจาก `${msg}` (ค่าที่ได้จาก Script Node) |
+| Request Body  | ใช้ค่าจาก `${msg}` (ค่าที่ได้จาก Script Node) **ไม่ต้อง Setbody ใน REST API |
+---
 ![image](https://github.com/user-attachments/assets/3985a061-8949-497f-8196-9e986bebd9ca)
 ![image](https://github.com/user-attachments/assets/9b4d2f89-718a-4a5f-953a-54735a7c39df)
-
----
-
 ### 3. ทดสอบระบบ
 
 - ส่ง Attributes,Telemetry ข้อมูล temperature จากอุปกรณ์ผ่าน ThingsBoard
